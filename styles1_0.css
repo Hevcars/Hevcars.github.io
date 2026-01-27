@@ -61,12 +61,12 @@ body {
   .menu {
     display: none;              /* ocultar menú por defecto */
     flex-direction: column;     /* menú vertical */
-    background: #ffffff;
+    background: #2c2c2c;
     position: absolute;
     top: 60px;                  /* debajo del header */
     right: 0;
     width: 200px;
-    border: 1px solid #ccc;
+    border: 1px solid #e84d29;
     padding: 10px;
   }
 
@@ -77,6 +77,7 @@ body {
   .menu-toggle {
     display: block;
     font-size: 28px;
+    color: #e84d29;
     cursor: pointer;
     margin-left: auto;
   }
