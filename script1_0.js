@@ -73,6 +73,74 @@ dots.forEach((dot, i) => {
   });
 });
 
+
+
+
 // Mostrar la primera sección al cargar
 showContent(index);
 
+// Selección de botones
+const btnProyectosNav = document.querySelector('a[href="/proyectos/"]'); 
+const btnNuestrosProyectos = document.querySelector('.hero-content a[href="/proyectos/"]'); 
+const btnAutosElectricos = document.querySelector('.servicio a[href="AUTOSELECTRICOS/index.html"]');
+
+// Función para resaltar con animación
+function resaltarBoton(boton) {
+  gsap.fromTo(boton, 
+    { scale: 1, boxShadow: "0 0 0px #00ffcc" }, 
+    { 
+      scale: 1.1, 
+      boxShadow: "0 0 20px #00ffcc", 
+      duration: 0.8, 
+      repeat: -1, 
+      yoyo: true, 
+      ease: "power1.inOut" 
+    }
+  );
+}
+
+// Aplicar animación a los tres botones
+resaltarBoton(btnProyectosNav);
+resaltarBoton(btnNuestrosProyectos);
+resaltarBoton(btnAutosElectricos);
+
+
+
+// Seleccionamos el botón de Proyectos
+const btn = document.getElementById("btn-proyectos");
+const zone = btn.parentElement; // zona alrededor del botón
+const strength = 0.2; // fuerza del efecto magnético
+
+// Wiggle continuo en rotación
+gsap.to(btn, {
+  rotation: 12,
+  duration: 1.5,
+  repeat: -1,
+  ease: "wiggle({wiggles:8, type:easeOut})"
+});
+
+// Efecto magnético al mover el mouse sobre la zona
+zone.addEventListener("mousemove", (e) => {
+  const rect = zone.getBoundingClientRect();
+  const x = gsap.utils.mapRange(rect.left, rect.right, -rect.width / 2, rect.width / 2, e.clientX);
+  const y = gsap.utils.mapRange(rect.top, rect.bottom, -rect.height / 2, rect.height / 2, e.clientY);
+
+  gsap.to(btn, {
+    x: x * strength,
+    y: y * strength,
+    duration: 0.4,
+    ease: "power2.out",
+    overwrite: "auto"
+  });
+});
+
+// Al salir del área, regresa suavemente al centro
+zone.addEventListener("mouseleave", () => {
+  gsap.to(btn, { 
+    x: 0, 
+    y: 0,
+    duration: 0.7,
+    ease: "elastic.out(1, 0.4)",
+    overwrite: "auto"
+  });
+});
